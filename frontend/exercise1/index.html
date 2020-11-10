@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header {
+            background-color: #B388FF;
+            top: 0;
+            width: 100%;
+        }
+        .header-absolute {
+            position: absolute;
+        }
+        .header-fixed {
+            position: fixed;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #37474F;
+        }
+        section article {
+            padding: 2em;
+        }
+    </style>
+</head>
+<body>
+    <header id="header" class="header-absolute">
+        <h1>header</h1>
+    </header>
+    <section>
+        <article><p>content</p></article>
+        <article><p>content</p></article>
+        <article><p>content</p></article>
+        <article><p>content</p></article>
+        <article><p>content</p></article>
+        <article><p>content</p></article>
+        <article><p>content</p></article>
+        <article><p>content</p></article>
+        <article><p>content</p></article>
+    </section>
+
+    <script>
+        const HEADER_CLASS_ABSOLUTE = 'header-absolute';
+        const HEADER_CLASS_FIXED = 'header-fixed';
+        const header = document.getElementById('header');
+        const headerClassList = [HEADER_CLASS_ABSOLUTE, HEADER_CLASS_FIXED];
+        let lastScrollTop = 0;
+        document.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (lastScrollTop < scrollTop) {
+                header.style.display = 'none';
+            } else {
+                header.style.display = '';
+                if (scrollTop === 0) {
+                    header.classList.remove(HEADER_CLASS_FIXED);
+                    header.classList.add(HEADER_CLASS_ABSOLUTE);
+                } else {
+                    header.classList.remove(HEADER_CLASS_ABSOLUTE);
+                    header.classList.add(HEADER_CLASS_FIXED);
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>
